@@ -1,29 +1,45 @@
-// Function to randomly select one option
+let previousPlay = null;
+const plays = ["Rock", "Paper", "Scissors"];
 function computerPlay() {
-  const options = ["Rock", "Paper", "Scissors"];
-  const randomIndex = Math.floor(Math.random() * options.length);
-  return options[randomIndex];
+  let randomIndex = Math.floor(Math.random() * plays.length);
+  let currentPlay;
+  do {
+    randomIndex = Math.floor(Math.random() * plays.length);
+    currentPlay = plays[randomIndex];
+  } while (currentPlay === previousPlay);
+  previousPlay = currentPlay;
+  return currentPlay;
 }
 
-// Function to play a single round of Rock Paper Scissors
+const computerChoice = computerPlay();
+
 function playRound(playerSelection, computerSelection) {
-  playerSelection = playerSelection.toLowerCase();
-  computerSelection = computerSelection.toLowerCase();
+    const winningConditions = {
+      rock: "scissors",
+      paper: "rock",
+      scissors: "paper",
+    };
 
-  if (playerSelection === computerSelection) {
-    return "It's a draw!";
-  } else if (
-    (playerSelection === "rock" && computerSelection === "scissors") ||
-    (playerSelection === "paper" && computerSelection === "rock") ||
-    (playerSelection === "scissors" && computerSelection === "paper")
-  ) {
-    return `You Won! ${playerSelection} beats ${computerSelection}`;
-  } else {
-    return `You Lose! ${computerSelection} beats ${playerSelection}`;
+    if (!winningConditions.hasOwnProperty(playerSelection.toLowerCase())) {
+      return "Invalid selection. Please choose rock, paper, or scissors.";
+    }
+
+    playerSelection = playerSelection.toLowerCase();
+    computerSelection = computerSelection.toLowerCase();
+
+    if (playerSelection === computerSelection) {
+      return "It's a tie!";
+    } else if (winningConditions[playerSelection] === computerSelection) {
+      return `You Win! ${playerSelection} beats ${computerSelection}`;
+    } else {
+      return `You Lose! ${computerSelection} beats ${playerSelection}`;
+    }
   }
-}
 
-// Function to play a 5 round game
+  const playerSelection = "rock";
+
+  console.log(playRound(playerSelection, computerChoice));
+
 function game() {
   let playerScore = 0;
   let computerScore = 0;
