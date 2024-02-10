@@ -1,13 +1,13 @@
-let radio = 4;
+let ratio = 4;
 const pi = Math.PI;
 
-const circumference = (radio) => {
-    return console.log(2 * pi * radio);
+const circumference = (ratio) => {
+    return console.log(2 * pi * ratio);
 };
 
-const area = (radio) => {
-    return console.log(pi * radio * radio);
+const area = (ratio) => {
+    return console.log(pi * ratio * ratio);
 }; 
 
-area(radio);
-circumference(radio);
+area(ratio);
+circumference(ratio);
