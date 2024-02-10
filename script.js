@@ -10,6 +10,7 @@ function computerPlay() {
   previousPlay = currentPlay;
   return currentPlay;
 }
+
 function playRound(playerSelection, computerSelection) {
   const winningConditions = {
     rock: "scissors",
@@ -21,8 +22,8 @@ function playRound(playerSelection, computerSelection) {
     return "Invalid selection. Please choose rock, paper, or scissors.";
   }
 
-  playerSelection = playerSelection.toLowerCase();
-  computerSelection = computerSelection.toLowerCase();
+  playerSelection = playerSelection.trim().toLowerCase();
+  computerSelection = computerSelection.trim().toLowerCase();
 
   if (playerSelection === computerSelection) {
     return "It's a tie!";
@@ -43,7 +44,7 @@ function game() {
       alert("Game canceled. See you next time!");
       return;
     }
-    playerSelection = playerSelection.toLowerCase();
+    playerSelection = playerSelection.toLowerCase().trim();
     if (!["rock", "paper", "scissors"].includes(playerSelection)) {
       alert("Invalid input! Please choose Rock, Paper, or Scissors.");
       i--;
