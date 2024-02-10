@@ -1,7 +1,7 @@
 let previousPlay = null;
 const plays = ["Rock", "Paper", "Scissors"];
 function computerPlay() {
-  let randomIndex = Math.floor(Math.random() * plays.length);
+  let randomIndex;
   let currentPlay;
   do {
     randomIndex = Math.floor(Math.random() * plays.length);
