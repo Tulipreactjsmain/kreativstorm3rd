@@ -10,7 +10,6 @@ function computerPlay() {
   previousPlay = currentPlay;
   return currentPlay;
 }
-
 function playRound(playerSelection, computerSelection) {
   const winningConditions = {
     rock: "scissors",
@@ -40,10 +39,9 @@ function game() {
 
   for (let i = 0; i < 5; i++) {
     let playerSelection = prompt("Choose Rock, Paper, or Scissors: ");
-    if (playerSelection == null) {
-      alert("Invalid input! Please choose Rock, Paper, or Scissors.");
-      i--;
-      continue;
+    if (playerSelection === null) {
+      alert("Game canceled. See you next time!");
+      return;
     }
     playerSelection = playerSelection.toLowerCase();
     if (!["rock", "paper", "scissors"].includes(playerSelection)) {
@@ -54,7 +52,6 @@ function game() {
     let computerSelection = computerPlay();
     let result = playRound(playerSelection, computerSelection);
     console.log(result);
-
     if (result.includes("Won")) {
       playerScore++;
     } else if (result.includes("Lose")) {
@@ -62,14 +59,18 @@ function game() {
     }
     console.log(`Score: ${playerScore} : ${computerScore}`);
   }
-
-  playerScore > computerScore
-    ? console.log("Congratulations, you won the game!")
-    : playerScore < computerScore
-    ? console.log("Oops, you lose the game!")
-    : console.log("Well done, It's a draw!");
-
+  if (playerScore > computerScore) {
+    console.log("Congratulations, you won the game!");
+  } else if (playerScore < computerScore) {
+    console.log("Oops, you lose the game!");
+  } else {
+    console.log("Well done, It's a draw!");
+  }
   const totalScore = `Total score: ${playerScore} : ${computerScore}`;
-
   return totalScore;
 }
+
+alert(
+  "Welcome to the Rock, Paper, Scissors Game!\n\nYou are about to engage in a battle of wits against the computer. Are you ready to test your luck and strategy?\n\nLet's begin!"
+);
+game();
