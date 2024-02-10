@@ -17,6 +17,6 @@
         <li>Have fun and enjoy the game!</li>
     </ul>    
     <p><em>Good luck!</em> Defeat the AI and prove your dominance in the game of Rock, Paper, Scissors. Have fun playing, and may the odds be ever in your favor!</p> 
-   <p>Visit the website: <a href="https://website.com">Rock Paper Scissors</a></p>
+   <p>Visit the website: <a href="https://tulipreactjsmain.github.io/kreativstorm3rd/">Rock Paper Scissors</a></p>
 </body>
 </html>
