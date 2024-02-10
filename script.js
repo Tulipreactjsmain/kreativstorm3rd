@@ -11,34 +11,28 @@ function computerPlay() {
   return currentPlay;
 }
 
-const computerChoice = computerPlay();
-
 function playRound(playerSelection, computerSelection) {
-    const winningConditions = {
-      rock: "scissors",
-      paper: "rock",
-      scissors: "paper",
-    };
+  const winningConditions = {
+    rock: "scissors",
+    paper: "rock",
+    scissors: "paper",
+  };
 
-    if (!winningConditions.hasOwnProperty(playerSelection.toLowerCase())) {
-      return "Invalid selection. Please choose rock, paper, or scissors.";
-    }
-
-    playerSelection = playerSelection.toLowerCase();
-    computerSelection = computerSelection.toLowerCase();
-
-    if (playerSelection === computerSelection) {
-      return "It's a tie!";
-    } else if (winningConditions[playerSelection] === computerSelection) {
-      return `You Win! ${playerSelection} beats ${computerSelection}`;
-    } else {
-      return `You Lose! ${computerSelection} beats ${playerSelection}`;
-    }
+  if (!winningConditions.hasOwnProperty(playerSelection.toLowerCase())) {
+    return "Invalid selection. Please choose rock, paper, or scissors.";
   }
 
-  const playerSelection = "rock";
+  playerSelection = playerSelection.toLowerCase();
+  computerSelection = computerSelection.toLowerCase();
 
-  console.log(playRound(playerSelection, computerChoice));
+  if (playerSelection === computerSelection) {
+    return "It's a tie!";
+  } else if (winningConditions[playerSelection] === computerSelection) {
+    return `You Won! ${playerSelection} beats ${computerSelection}`;
+  } else {
+    return `You Lose! ${computerSelection} beats ${playerSelection}`;
+  }
+}
 
 function game() {
   let playerScore = 0;
@@ -46,40 +40,36 @@ function game() {
 
   for (let i = 0; i < 5; i++) {
     let playerSelection = prompt("Choose Rock, Paper, or Scissors: ");
-
-    // Convert the input to lowercase and check if it's valid
-    playerSelection = playerSelection.toLowerCase();
-    if (!["rock", "paper", "scissors"].includes(playerSelection)) {
-      console.error(
-        "Error: Invalid input! Please choose Rock, Paper, or Scissors."
-      );
-
-      //handles invalid input
+    if (playerSelection == null) {
+      alert("Invalid input! Please choose Rock, Paper, or Scissors.");
       i--;
       continue;
     }
-
+    playerSelection = playerSelection.toLowerCase();
+    if (!["rock", "paper", "scissors"].includes(playerSelection)) {
+      alert("Invalid input! Please choose Rock, Paper, or Scissors.");
+      i--;
+      continue;
+    }
     let computerSelection = computerPlay();
     let result = playRound(playerSelection, computerSelection);
     console.log(result);
 
-    // Score tracking
-    if (result.includes("Win")) {
+    if (result.includes("Won")) {
       playerScore++;
     } else if (result.includes("Lose")) {
       computerScore++;
     }
+    console.log(`Score: ${playerScore} : ${computerScore}`);
   }
 
-  // Displaying the final result
-  if (playerScore > computerScore) {
-    console.log("Congratulations, you won the game!");
-  } else if (playerScore < computerScore) {
-    console.log("Oops, you lose the game!");
-  } else {
-    console.log("Well done, It's a draw!");
-  }
+  playerScore > computerScore
+    ? console.log("Congratulations, you won the game!")
+    : playerScore < computerScore
+    ? console.log("Oops, you lose the game!")
+    : console.log("Well done, It's a draw!");
+
+  const totalScore = `Total score: ${playerScore} : ${computerScore}`;
+
+  return totalScore;
 }
-
-// Calling the game function to start playing
-game();
