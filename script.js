@@ -1,14 +1,8 @@
-let previousPlay = null;
 const plays = ["Rock", "Paper", "Scissors"];
 function computerPlay() {
   let randomIndex;
-  let currentPlay;
-  do {
-    randomIndex = Math.floor(Math.random() * plays.length);
-    currentPlay = plays[randomIndex];
-  } while (currentPlay === previousPlay);
-  previousPlay = currentPlay;
-  return currentPlay;
+  randomIndex = Math.floor(Math.random() * plays.length);
+  return plays[randomIndex];
 }
 
 function playRound(playerSelection, computerSelection) {
@@ -18,13 +12,16 @@ function playRound(playerSelection, computerSelection) {
     scissors: "paper",
   };
 
-  if (!winningConditions.hasOwnProperty(playerSelection.toLowerCase())) {
+  playerSelection = playerSelection?.trim().toLowerCase();
+  computerSelection = computerSelection?.trim().toLowerCase();
+
+  if (!winningConditions.hasOwnProperty(playerSelection)) {
     return "Invalid selection. Please choose rock, paper, or scissors.";
   }
 
-  playerSelection = playerSelection.trim().toLowerCase();
-  computerSelection = computerSelection.trim().toLowerCase();
-
+  if (!["rock", "paper", "scissors"].includes(playerSelection)) {
+    alert("Invalid input! Please choose Rock, Paper, or Scissors.");
+  }
   if (playerSelection === computerSelection) {
     return "It's a tie!";
   } else if (winningConditions[playerSelection] === computerSelection) {
@@ -44,12 +41,6 @@ function game() {
       alert("Game canceled. See you next time!");
       return;
     }
-    playerSelection = playerSelection.toLowerCase().trim();
-    if (!["rock", "paper", "scissors"].includes(playerSelection)) {
-      alert("Invalid input! Please choose Rock, Paper, or Scissors.");
-      i--;
-      continue;
-    }
     let computerSelection = computerPlay();
     let result = playRound(playerSelection, computerSelection);
     console.log(result);
@@ -57,6 +48,9 @@ function game() {
       playerScore++;
     } else if (result.includes("Lose")) {
       computerScore++;
+    } else if (result.includes("Invalid")) {
+      i--;
+      continue;
     }
     console.log(`Score: ${playerScore} : ${computerScore}`);
   }
