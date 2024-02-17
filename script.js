@@ -31,14 +31,21 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
+function getUserInput() {
+  let playerSelection = prompt("Choose Rock, Paper, or Scissors: ");
+  if (playerSelection === null) {
+    alert("Game canceled. See you next time!");
+    return null;
+  }
+  return playerSelection;
+}
 function game() {
   let playerScore = 0;
   let computerScore = 0;
 
   for (let i = 0; i < 5; i++) {
-    let playerSelection = prompt("Choose Rock, Paper, or Scissors: ");
+    let playerSelection = getUserInput();
     if (playerSelection === null) {
-      alert("Game canceled. See you next time!");
       return;
     }
     let computerSelection = computerPlay();
